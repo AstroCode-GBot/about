@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: venzoo-premium-emoji-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --workers 1 --threads 4 --timeout 120 app:app
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_ID
+        value: "5684263622"
+      - key: BOT_USERNAME
+        value: "VenzooPremiumEmojiBot"
+      - key: DATA_DIR
+        value: data
